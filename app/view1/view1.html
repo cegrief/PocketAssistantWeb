@@ -55,7 +55,8 @@
           <div id="reminders">
             <div ng-repeat="c in countdown">
               <div class="row suggestion" ng-show="c.visible">
-                <div class="col col-75">
+                <div  class="col col-25"></div>
+                <div class="col col-50">
                   {{c.title}}
                   <span ng-if="c.daysUntil > 1">in {{c.daysUntil}} days</span>
                   <span ng-if="c.daysUntil == 1">in {{c.daysUntil}} day</span>
@@ -94,7 +95,7 @@
               <span ng-if="isUntitled(ev)">(No title)</span>
               <span class="now" ng-show="ev.current">&emsp;Now!</span>
             </div>
-            <div class="col col-10 icon super-edit" ng-click="getEvent(ev)"></div>
+            <div class="col col-10 icon super-edit" style="margin-top: -30px;" ng-click="getEvent(ev)"></div>
           </div>
 
           <div ng-show="ev.colorId === '0'">
