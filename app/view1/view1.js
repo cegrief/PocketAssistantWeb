@@ -664,7 +664,7 @@ angular.module('myApp.view1', ['ngRoute', 'supersonic'])
        *  event will be updated.
        */
       $scope.update = function () {
-        if (new Date($scope.updateData.end.dateTime).getTime() >= new Date($scope.updateData.start.dateTime).getTime() ){
+        /*if (new Date($scope.updateData.end.dateTime).getTime() >= new Date($scope.updateData.start.dateTime).getTime() ){
           supersonic.ui.dialog.confirm("Are you sure you want to update this event?", confirm).then(function (index) {
             if (index == 0) {
               $scope.updateEvent();}
@@ -672,7 +672,8 @@ angular.module('myApp.view1', ['ngRoute', 'supersonic'])
         }
         else {
           supersonic.ui.dialog.alert('START time should be earlier than END time!')
-        }
+        }*/
+        $scope.updateEvent();
       };
 
       /**
@@ -711,11 +712,14 @@ angular.module('myApp.view1', ['ngRoute', 'supersonic'])
        * If user confirms, calls 'deleteEvent' function
        */
       $scope.delete = function () {
-        supersonic.ui.dialog.confirm("Are you sure you want to delete this event?", confirm).then(function (index) {
+        $scope.deleteEvent();
+        /*supersonic.ui.dialog.confirm("Are you sure you want to delete this event?", confirm).then(function (index) {
           if (index == 0) {
             $scope.deleteEvent();
           }
-        });
+      });*/
+
+        
       };
 
       /**
@@ -794,7 +798,7 @@ angular.module('myApp.view1', ['ngRoute', 'supersonic'])
        *  event will be updated.If choosing 'no',no action.
        */
       $scope.addEvent = function () {
-        if (!$scope.updateData.start.dateTime | !$scope.updateData.summary | !$scope.updateData.end.dateTime | $scope.updateData.start.dateTime >= $scope.updateData.end.dateTime){
+        /*if (!$scope.updateData.start.dateTime | !$scope.updateData.summary | !$scope.updateData.end.dateTime | $scope.updateData.start.dateTime >= $scope.updateData.end.dateTime){
           if(!$scope.updateData.summary){
             supersonic.ui.dialog.alert('Please add a SUMMARY for your new event!')
           }
@@ -818,7 +822,8 @@ angular.module('myApp.view1', ['ngRoute', 'supersonic'])
               $scope.addNewEvent();
             }
           });
-        }
+        }*/
+        $scope.addNewEvent();
       };
 
       /**
