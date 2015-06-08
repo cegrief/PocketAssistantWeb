@@ -72,6 +72,7 @@ body {
     font-size: 20px;
     color: black;
     font-weight: bold;
+    position: relative;
 }
 
 .event {
@@ -306,6 +307,7 @@ input[type="text"] {
 }
 
 .hiddenReminders {
+    position: relative;
     margin-top: 2px;
     margin-left: 8px;
 }
