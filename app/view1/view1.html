@@ -1,35 +1,32 @@
-<div class="padding">
+<div class="container">
   <link rel="stylesheet" href="view1/view1.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
   
-  <div class="bar bar-nav" ng-show="cal">
+  <div class="bar bar-nav" ng-show="cal" style="top:100px">
     <h5 ng-bind="titleBar.name"></h5>
-    <button side="right" ng-bind="titleBar.button" ng-click="undoButton()"></button>
-    <button side="left" ng-bind="titleBar.back" ng-click="backButton()"></button>
-    <button side="right" ng-bind="titleBar.addBut" ng-click="addButton()"></button>
+    <button ng-show="addPage" ng-bind="titleBar.back" ng-click="backButton()"></button>
+    <button ng-show="mainPage" ng-bind="titleBar.addBut" ng-click="addButton()"></button>
   </div>
   
-  <div ng-show="mainPage">
+  <div ng-show="mainPage" style="top:100px">
     <div ng-hide="cal" style="top:500px">
       <button id="authorize-button" class="button button-stable" ng-click="handleClientLoad()">
         Click here to get your Calendar!
       </button>
     </div>
 
-    <div ng-show="cal">
-      <div class="date">
+    <div ng-show="cal" style="top:100px">
+      <div class="date" style="top:100">
         <div>
-          <i class="icon super-chevron-left chevron" ng-click="prevdate()"></i>
-          <i class="icon super-calendar calicon"></i>
+          <button ng-click="prevdate()"></button>
           <label class="item item-input calendar">
             <input style="font-size:18px;font-weight:bold;padding-top:4px" type="date" ng-model="calendarDate">
           </label>
-          <i class="icon icon-right super-chevron-right chevron" ng-click="nextdate()"></i>
+          <button ng-click="nextdate()"></button>
         </div>
       </div>
       <div class="title">
         Reminders
-        <i class="icon super-clipboard"></i>
         <button type="button"
                 class="hideReminder button button-clear button-outline button-small button-stable button-positive"
                 ng-click="switchButton()" ng-hide="visibleReminders == 0">
