@@ -700,7 +700,7 @@ angular.module('myApp.view1', ['ngRoute', 'supersonic'])
           $scope.mainPage = true;
           $scope.titleBar = {name: 'Pocket Assistant', button: '', back: '', addBut: 'Add'};
           getCalendarData();
-          supersonic.ui.dialog.alert("Event Updated!");
+          //supersonic.ui.dialog.alert("Event Updated!");
         });
       };
 
