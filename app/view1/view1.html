@@ -1,4 +1,14 @@
 <link rel="stylesheet" href="view1/view1.css">
+<script src="https://apis.google.com/js/client.js"></script>
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="bower_components/supersonic/supersonic.js"></script>
+  <script src="app.js"></script>
+  <script src="view1/view1.js"></script>
+ 
+  <script src="components/version/version.js"></script>
+  <script src="components/version/version-directive.js"></script>
+  <script src="components/version/interpolate-filter.js"></script>
 
     <super-navbar ng-show="cal">
         <super-navbar-title ng-bind="titleBar.name"></super-navbar-title>
@@ -26,7 +36,8 @@
                 </div>
             </div>
             <div class="title">
-                Reminders
+                <div class="col col-50"></div>
+                <div class="col col-50">Reminders</div>
                 <i class="icon super-clipboard"></i>
                 <button type="button"
                         class="hideReminder button button-clear button-outline button-small button-stable button-positive"
