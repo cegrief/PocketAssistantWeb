@@ -37,7 +37,7 @@ angular.module('myApp.view1', ['ngRoute', 'supersonic'])
       $scope.loading = false;
 
       //Date object representing the current date page on the calendar
-      //$scope.calendarDate = Date.now();
+      $scope.calendarDate = Date.now();
 
       //Number of days navigated forward or backward used to calculate calendar dates to load
       var dayCount = 0;
