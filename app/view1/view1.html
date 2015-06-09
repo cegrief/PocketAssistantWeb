@@ -21,7 +21,7 @@
             </div> 
 
           <div ng-show="mainPage" >
-            <div ng-hide="cal" style="top:500px">
+            <div ng-hide="cal" style="top:500px; position: relative;">
               <button id="authorize-button" class="button button-stable" ng-click="handleClientLoad()">
                 Click here to get your Calendar!
               </button>
@@ -59,7 +59,7 @@
                 <div ng-hide="hideReminder">
                   <div id="reminders">
                     <div ng-repeat="c in countdown">
-                      <div class="row suggestion" ng-show="c.visible">
+                      <div class="row suggestion" ng-if="c.visible">
                         <div class="col col-75">
                           {{c.title}}
                           <span ng-if="c.daysUntil > 1">in {{c.daysUntil}} days</span>

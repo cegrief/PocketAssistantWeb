@@ -1,4 +1,5 @@
 body {
+    position: relative;
     background: url("SplashScreen.jpg") no-repeat center center fixed;
     background-size: cover;
 }
