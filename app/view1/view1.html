@@ -91,7 +91,7 @@
                 <div ng-repeat="ev in events" ng-hide="loading">
                   <div ng-if="ev.conflict === 1" class="TimeConflict">Time Conflict!</div>
 
-                  <div ng-hide="ev.colorId === '0'" class="row event"
+                  <div ng-if="ev.colorId != '0'" class="row event"
                           ng-class="{'conflict1': ev.conflict === 1,'conflict2': ev.conflict === 2,'conflict3': ev.conflict === 3,'currentEvent':ev.current === true,'blue': ev.colorId === '1','green': ev.colorId === '2' ,'purple': ev.colorId === '3','red': ev.colorId === '4','yellow': ev.colorId === '5','orange': ev.colorId === '6','turquoise': ev.colorId === '7','grey': ev.colorId === '8','boldBlue': ev.colorId === '9', 'boldGreen': ev.colorId === '10','pink': ev.colorId === '11','NoId': ev.colorId === Null}">
                     <div class="col col-20 eventTime" ng-class="'#ffc900'">{{ev.start.dateTime | date:"hh:mm"}}-{{ev.end.dateTime | date:"hh:mm"}}</div>
                     <div class="col col-70">&emsp;
@@ -103,7 +103,7 @@
                     <button class="col col-10" style="font-size:10px;" ng-click="getEvent(ev)">Edit {{ev.summary}}</button>
                   </div>
 
-                  <div ng-show="ev.colorId === '0'">
+                  <div ng-if="ev.colorId === '0'">
                     <div ng-hide="ev.addedEvent">
                       <div class="row suggestion" ng-class="{'currentEvent': ev.current}">
                         <div class="col col-85">
@@ -114,7 +114,7 @@
                         <button class="col col-15 button button-icon icon super-navicon" ng-click="toggle(ev)"></button>
                       </div>
 
-                      <div ng-show="ev.showOption">
+                      <div ng-if="ev.showOption">
                         <div ng-repeat="suggestion in sugg">
                           <div ng-if="greaterThanHour(ev)">
                             <div ng-show="!isNotHourLong(suggestion)" class="sugglist row"
