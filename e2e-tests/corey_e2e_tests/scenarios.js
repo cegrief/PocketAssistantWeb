@@ -1,53 +1,97 @@
 'use strict';
 
-
-/**
- * [selectWindow Focus the browser to the index window. Implementation by http://stackoverflow.com/questions/21700162/protractor-e2e-testing-error-object-object-object-has-no-method-getwindowha]
- * @param  {[Object]} index [Is the index of the window. E.g., 0=browser, 1=FBpopup]
- * @return {[!webdriver.promise.Promise.<void>]}       [Promise resolved when the index window is focused.]
- */
-selectWindow = function (index) {
-
-    // wait for handels[index] to exists
-    browser.driver.wait(function() {
-        return browser.driver.getAllWindowHandles().then(function (handles) {
-            /**
-             * Assume that handles.length >= 1 and index >=0.
-             * So when i call selectWindow(index) i return
-             * true if handles contains that window.
-             */
-            if(handles.length > index) {
-                return true;
-            }
-        });
-    });
-    // here i know that the requested window exists
-
-    // switch to the window
-    return browser.driver.getAllWindowHandles().then(function (handles) {
-        return browser.driver.switchTo().window(handles[index]);
-    });
-};
-
 describe('Corey End To End Tests', function() {
 
-    beforeEach(function() {
-        browser.driver.ignoreSynchronization = true;
+    //This function was created by Gregory Elliot and shared with the team in order to facilitate login.
+    //Alternatively, teammates were able to manually login
+    it('Signs into google account', function () {
+        browser.driver.get('https://accounts.google.com/ServiceLogin?sacu=1&hl=en');
+
+        var email = browser.driver.findElement(by.id('Email'));
+        email.sendKeys('teambrown394');
+
+        var signIn= browser.driver.findElement(by.id('next'));
+        signIn.click();
+
+        browser.driver.sleep(2000);
+
+        var password = browser.driver.findElement(by.id('Passwd'));
+        password.sendKeys('goteambrown394');
+
+        var signInButton = browser.driver.findElement(by.id('signIn'));
+        signInButton.click();
+
+        browser.driver.sleep(2000);
     });
 
+    it('Should Edit an events title and color', function () {
+        browser.driver.get('http://localhost:8000/app/index.html#/view1');
 
-
-    it('should focus on the gauth window', function(){
-        browser.driver.get('http://localhost:8000/app/');
         element(by.buttonText("Click here to get your Calendar!")).click();
-        element(by.buttonText("Click here to get your Calendar!")).click();
-        //selectWindow(1)
+        browser.driver.sleep(2000);
 
-        browser.driver.sleep(1000);
+        //pick an event to edit
+        var eventsEdit = element.all(by.buttonText('Edit'));
+        expect(eventsEdit.count()).toBeGreaterThan(0);
 
-        browser.driver.sleep(8000);
+        eventsEdit.get(0).click();
 
+        browser.driver.sleep(2000);
 
+        element(by.model('updateData.summary'))
+            .sendKeys(protractor.Key.chord(protractor.Key.CONTROL, "a"))
+            .sendKeys(protractor.Key.BACK_SPACE)
+            .sendKeys('Updated');
 
+        element(by.cssContainingText('option', 'Purple')).click();
+        element(by.buttonText("Update")).click();
+        browser.driver.sleep(2000);
+
+        var afterEdit = element.all(by.css('.event .col-70'));
+
+        afterEdit.filter(function(el, index){
+            return el.getText().then(function(text){
+                return text === "Updated"
+            })
+        });
+
+        expect(afterEdit.count()).toBeGreaterThan(0);
+        expect(afterEdit.get(0).getText()).toBe("Updated");
+
+    });
+
+    it('Should reset the update screen when clicking clear', function () {
+
+        browser.driver.sleep(2000);
+        var eventsEdit = element.all(by.buttonText('Edit'));
+
+        eventsEdit.count().then(function(ocount){
+            expect(ocount).toBeGreaterThan(0);
+        });
+
+        eventsEdit.get(0).click();
+
+        browser.driver.sleep(2000);
+
+        element(by.model('updateData.summary')).getAttribute('value')
+            .then(function(originText){
+                console.log(originText);
+                element(by.model('updateData.summary')).sendKeys('asdf');
+                element(by.cssContainingText('option', 'Yellow')).click();
+
+                element(by.model('updateData.summary')).getAttribute('value')
+                    .then(function(Text2){
+                        expect(originText).not.toBe(Text2);
+
+                    });
+
+                element(by.buttonText('Clear')).click();
+
+                browser.driver.sleep(2000);
+
+                element(by.model('updateData.summary')).getAttribute('value').then(function(Text3){
+                    expect(originText).toBe(Text3);
+                })
+            });
     });
 });
